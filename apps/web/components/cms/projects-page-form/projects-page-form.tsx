@@ -286,6 +286,13 @@ function ProjectsListSection({ control }: { control: F }) {
                 label="Short Description"
                 multiline
               />
+              <PlainField
+                control={control}
+                name={`sections.projects.projects.${i}.kitchens`}
+                label="Kitchens"
+                type="number"
+                placeholder="96"
+              />
               <ImageField
                 control={control}
                 name={`sections.projects.projects.${i}.image`}
@@ -346,6 +353,7 @@ function ProjectsListSection({ control }: { control: F }) {
             category: emptyLoc(),
             completionYear: emptyLoc(),
             shortDescription: emptyLoc(),
+            kitchens: 0,
             image: emptyImg(),
             href: "",
             featured: false,

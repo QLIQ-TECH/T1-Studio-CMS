@@ -21,6 +21,7 @@ export interface ProjectsListItem {
   category: Localized
   completionYear?: Localized
   shortDescription: Localized
+  kitchens?: number
   image: ApiImage
   href: string
   featured: boolean
