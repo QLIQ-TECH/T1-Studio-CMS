@@ -52,7 +52,7 @@ export function setAuthCookies(
 ) {
   response.cookies.set(ACCESS_TOKEN_COOKIE, tokens.accessToken ?? "", {
     ...cookieOptions,
-    maxAge: tokens.accessToken ? 60 * 15 : 0,
+    maxAge: tokens.accessToken ? 60 * 60 * 24 : 0,
   })
   response.cookies.set(REFRESH_TOKEN_COOKIE, tokens.refreshToken ?? "", {
     ...cookieOptions,
