@@ -8,7 +8,7 @@ import { getAuthTokens } from "@/lib/auth"
  * - No collection/field aliases are used.
  * - Field names are preserved exactly as provided.
  * - Frontend image shape: { url, key, alt }
- * - API image shape:       { src, key, alt }
+ * - API image shape:       { url, key, alt }
  * - Temporary React field-array IDs (tmp-...) are removed.
  */
 function toApiValue(value: unknown): unknown {
@@ -23,41 +23,6 @@ function toApiValue(value: unknown): unknown {
   }
 
   const object = value as Record<string, unknown>
-
-  /**
-   * Frontend image:
-   *
-   * {
-   *   url: "",
-   *   key: "",
-   *   alt: {
-   *     en: "",
-   *     ar: ""
-   *   }
-   * }
-   *
-   * API:
-   *
-   * {
-   *   src: "",
-   *   key: "",
-   *   alt: {
-   *     en: "",
-   *     ar: ""
-   *   }
-   * }
-   */
-  if ("url" in object && "alt" in object && typeof object.url === "string") {
-    return {
-      src: object.url,
-      ...(typeof object.key === "string" && object.key
-        ? {
-            key: object.key,
-          }
-        : {}),
-      alt: toApiValue(object.alt),
-    }
-  }
 
   /**
    * Preserve every field name exactly.
@@ -89,7 +54,7 @@ function toApiValue(value: unknown): unknown {
 /**
  * Convert API CMS data back to the frontend structure.
  *
- * API image:
+ * Legacy API image (current responses already use `url`):
  * {
  *   src: "",
  *   key: "",
@@ -125,7 +90,7 @@ function fromApiValue(value: unknown): unknown {
   const object = value as Record<string, unknown>
 
   /**
-   * API image -> frontend image
+   * Legacy API image -> frontend image. Preserve current `url` responses.
    */
   if (
     "src" in object &&

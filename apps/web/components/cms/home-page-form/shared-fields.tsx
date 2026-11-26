@@ -281,12 +281,27 @@ export function ImageField({
                   Remove image
                 </button>
               )}
-              <PlainField
-                control={control}
-                name={`${name}.url`}
-                label="Image URL"
-                placeholder="https://..."
-              />
+              <div className="space-y-1.5">
+                <Label className="text-sm font-medium" htmlFor={`${inputId}-url`}>
+                  Image URL
+                </Label>
+                <Input
+                  id={`${inputId}-url`}
+                  value={imageValue?.url ?? ""}
+                  disabled={isUploading}
+                  placeholder="https://..."
+                  onBlur={field.onBlur}
+                  onChange={(event) => {
+                    // A manually entered URL replaces the stored upload.
+                    // Keeping its old key would restore the old image on reload.
+                    field.onChange({
+                      ...imageValue,
+                      url: event.target.value,
+                      key: "",
+                    })
+                  }}
+                />
+              </div>
             </div>
           )
         }}
