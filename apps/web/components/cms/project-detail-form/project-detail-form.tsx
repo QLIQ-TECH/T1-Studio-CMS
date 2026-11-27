@@ -1,5 +1,6 @@
 "use client"
 
+
 import { Button } from "@workspace/ui/components/button"
 
 import {
@@ -119,12 +120,14 @@ export function ProjectDetailForm({
 
       <HeroSection control={control} />
       <OverviewSection control={control} />
+      <ApproachSection control={control} />
       <BeforeAfterSection control={control} />
       <GallerySection control={control} />
       <MaterialsSection control={control} />
       <ProjectInfoSection control={control} />
       <TestimonialSection control={control} />
       <RelatedProjectsSection control={control} />
+      <ProjectFaqSection control={control} />
       <ConsultationSection control={control} />
 
       <PageMetadataSection control={control} order={10} />
@@ -268,6 +271,7 @@ function OverviewSection({ control }: { control: F }) {
         label="Description"
         multiline
       />
+      <LocalizedField control={control} name="sections.overview.challenge" label="Challenge" multiline />
       <ImageField
         control={control}
         name="sections.overview.image"
@@ -1039,4 +1043,27 @@ function ConsultationFieldCard({
       <DeleteItemButton onClick={onRemove} />
     </div>
   )
+}
+
+function ApproachSection({ control }: { control: F }) {
+  return <SectionAccordion title="Our Approach" order={3} control={control} visibleName="sections.approach.isVisible">
+    <LocalizedField control={control} name="sections.approach.eyebrow" label="Eyebrow" />
+    <LocalizedField control={control} name="sections.approach.heading" label="Heading" />
+    <LocalizedField control={control} name="sections.approach.description" label="Approach" multiline />
+    <ImageField control={control} name="sections.approach.image" label="Approach Image" />
+  </SectionAccordion>
+}
+
+function ProjectFaqSection({ control }: { control: F }) {
+  const { fields, append, remove } = useFieldArray({ control, name: "sections.faq.faqs" })
+  return <SectionAccordion title="Frequently Asked Questions" order={9} control={control} visibleName="sections.faq.isVisible">
+    <LocalizedField control={control} name="sections.faq.heading" label="Heading" />
+    {fields.map((field, i) => <div key={field.id} className="space-y-3 rounded-lg border p-4">
+      <LocalizedField control={control} name={`sections.faq.faqs.${i}.question`} label="Question" />
+      <LocalizedField control={control} name={`sections.faq.faqs.${i}.answer`} label="Answer" multiline />
+      <BoolField control={control} name={`sections.faq.faqs.${i}.isVisible`} label="Visible" />
+      <DeleteItemButton onClick={() => remove(i)} />
+    </div>)}
+    <AddItemButton label="Add FAQ" onClick={() => append({ question: emptyLoc(), answer: emptyLoc(), isVisible: true })} />
+  </SectionAccordion>
 }

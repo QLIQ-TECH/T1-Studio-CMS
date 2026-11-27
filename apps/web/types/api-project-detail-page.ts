@@ -20,6 +20,7 @@ export interface ProjectOverviewSection {
   heading: Localized
   description: Localized
   image: ApiImage
+  challenge?: Localized
   imagePosition: "left" | "right"
 }
 
@@ -183,6 +184,8 @@ export interface ProjectDetailConsultationSection {
 }
 
 export interface ProjectDetailSections {
+  approach?: { isVisible: boolean; order: number; eyebrow?: Localized; heading: Localized; description: Localized; image?: ApiImage }
+  faq?: { isVisible: boolean; order: number; heading: Localized; faqs: { _id?: string; question: Localized; answer: Localized; isVisible: boolean }[] }
   hero: ProjectDetailHeroSection
   overview: ProjectOverviewSection
   beforeAfter: ProjectDetailBeforeAfterSection

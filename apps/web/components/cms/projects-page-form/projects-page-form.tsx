@@ -328,6 +328,11 @@ function ProjectsListSection({ control }: { control: F }) {
               <div className="grid grid-cols-2 gap-3">
                 <BoolField
                   control={control}
+                  name={`sections.projects.projects.${i}.hasInnerPage`}
+                  label="Enable project detail link (publish the detail page first)"
+                />
+                <BoolField
+                  control={control}
                   name={`sections.projects.projects.${i}.featured`}
                   label="Featured"
                 />

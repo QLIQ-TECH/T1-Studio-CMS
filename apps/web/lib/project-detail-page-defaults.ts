@@ -13,6 +13,8 @@ export function createEmptyProjectDetailPage(): ProjectDetailPageApiData {
     projectCategory: "",
     status: "draft",
     sections: {
+      approach: { ...section(3), isVisible: false, heading: localized(), description: localized() },
+      faq: { ...section(9), isVisible: false, heading: localized(), faqs: [] },
       hero: { ...section(1), eyebrow: localized(), heading: localized(), description: localized(), location: localized(), backgroundImage: image(), mobileImage: image(), stats: [], overlayOpacity: 0 },
       overview: { ...section(2), eyebrow: localized(), heading: localized(), description: localized(), image: image(), imagePosition: "left" },
       beforeAfter: { ...section(3), eyebrow: localized(), heading: localized(), description: localized(), items: [], showNavigation: true, autoplay: false },

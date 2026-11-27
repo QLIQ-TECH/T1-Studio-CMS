@@ -24,6 +24,7 @@ export interface ProjectsListItem {
   kitchens?: number
   image: ApiImage
   href: string
+  hasInnerPage?: boolean
   featured: boolean
   position: ProjectPosition
   isVisible: boolean
